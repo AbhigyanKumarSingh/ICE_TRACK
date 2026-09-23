@@ -1,0 +1,1913 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICETRACK - National Polar Operations & Expedition Logistics Portal | Government of India</title>
+    <meta name="description" content="ICETRACK - National Polar Operations and Logistics Command Portal, Ministry of Earth Sciences, Government of India. Centralized operational command for Maitri, Bharati, and Dakshin Ice Camp." />
+    <meta property="og:title" content="ICETRACK - National Polar Operations Portal" />
+    <meta property="og:description" content="National Polar Operations & Expedition Logistics Command Portal, Ministry of Earth Sciences, Government of India" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts: Montserrat & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <!-- Background overlay for the Arctic theme -->
+    <div class="arctic-bg" id="mainBg"></div>
+
+    <!-- Official Government Homepage & Authentication Gateway -->
+    <div id="loginSection" class="auth-section active">
+      
+      <!-- Top Utility Bar (Government of India) -->
+      <div class="gov-top-strip">
+        <div class="container-fluid px-lg-5 d-flex flex-wrap justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <span class="fw-semibold">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              भारत सरकार | Government of India
+            </span>
+            <span class="text-white-50 d-none d-md-inline">|</span>
+            <span class="d-none d-md-inline text-light">पृथ्वी विज्ञान मंत्रालय | Ministry of Earth Sciences</span>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <a href="#govMainContent" class="d-none d-sm-inline">मुख्य सामग्री पर जाएं | Skip to main content</a>
+            <div class="d-flex align-items-center gap-1">
+              <button class="gov-access-btn" id="fontDec" title="Decrease text size">A-</button>
+              <button class="gov-access-btn" id="fontReset" title="Normal text size">A</button>
+              <button class="gov-access-btn" id="fontInc" title="Increase text size">A+</button>
+            </div>
+            <a href="https://www.india.gov.in" target="_blank" rel="noreferrer" class="d-none d-lg-inline text-warning fw-semibold">
+              india.gov.in <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.65rem;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- National Tricolor Line -->
+      <div class="gov-tricolor-line"></div>
+
+      <!-- Main Government Portal Header -->
+      <header class="gov-portal-header">
+        <div class="container-fluid px-lg-5">
+          <div class="row align-items-center">
+            <!-- Left: National Emblem & Department Branding -->
+            <div class="col-12 col-md-7 col-lg-8 d-flex align-items-center gap-3 mb-3 mb-md-0">
+              <!-- Ashoka Lion Capital Emblem SVG -->
+              <div class="flex-shrink-0">
+                <svg class="gov-emblem-img" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="46" fill="#0b2545" stroke="#FF9933" stroke-width="3"/>
+                  <!-- Ashoka Chakra Spokes -->
+                  <circle cx="50" cy="50" r="20" stroke="#FFFFFF" stroke-width="2"/>
+                  <circle cx="50" cy="50" r="6" fill="#FFFFFF"/>
+                  <path d="M50 30 L50 70 M30 50 L70 50 M36 36 L64 64 M36 64 L64 36" stroke="#FFFFFF" stroke-width="1.5"/>
+                  <path d="M43 32 L57 68 M32 57 L68 43 M43 68 L57 32 M32 43 L68 57" stroke="#FFFFFF" stroke-width="1.2"/>
+                  <path d="M25 105 L75 105" stroke="#138808" stroke-width="4" stroke-linecap="round"/>
+                  <text x="50" y="117" font-family="'Montserrat', sans-serif" font-size="8" font-weight="700" fill="#0b2545" text-anchor="middle">सत्यमेव जयते</text>
+                </svg>
+              </div>
+              <div class="border-start border-2 border-secondary-subtle ps-3">
+                <div class="gov-ministry-hi">राष्ट्रीय ध्रुवीय एवं समुद्री अनुसंधान केंद्र (एनसीपीओआर)</div>
+                <div class="gov-ministry-en">National Centre for Polar and Ocean Research (NCPOR), Ministry of Earth Sciences</div>
+                <div class="d-flex align-items-baseline gap-2 mt-1">
+                  <h1 class="gov-portal-main-title mb-0">ICETRACK</h1>
+                  <span class="badge bg-primary text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.5px;">National Portal</span>
+                </div>
+                <div class="gov-portal-subtext">केंद्रीय ध्रुवीय प्रचालन, रसद एवं जीवन-रक्षक कमान प्रणाली • Indian Antarctic Programme</div>
+              </div>
+            </div>
+
+            <!-- Right: Certifications & Emergency Ops Hotline -->
+            <div class="col-12 col-md-5 col-lg-4 text-md-end">
+              <div class="d-inline-flex flex-column align-items-md-end">
+                <div class="gov-header-badge mb-2">
+                  <div class="small text-muted fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                    <i class="fa-solid fa-phone-volume text-danger me-1"></i> 24x7 Antarctic Ops Comms
+                  </div>
+                  <div class="fw-bold text-dark font-monospace" style="font-size: 0.95rem;">+91-832-2525600</div>
+                </div>
+                <div class="d-flex gap-2">
+                  <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;"><i class="fa-solid fa-shield-check text-success me-1"></i> NIC e-Gov Verified</span>
+                  <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;"><i class="fa-solid fa-satellite-dish text-primary me-1"></i> GSAT-7A Uplink</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Official Navigation Bar -->
+      <nav class="gov-main-nav">
+        <div class="container-fluid px-lg-5 d-flex flex-wrap justify-content-between align-items-center">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="gov-nav-link active" href="#govMainContent"><i class="fa-solid fa-house"></i> Home (मुख्य पृष्ठ)</a>
+            </li>
+            <li class="nav-item">
+              <a class="gov-nav-link" href="#govBasesSection"><i class="fa-solid fa-mountain-sun"></i> Antarctic Bases (स्टेशन)</a>
+            </li>
+            <li class="nav-item">
+              <a class="gov-nav-link" href="#govServicesSection"><i class="fa-solid fa-compass"></i> Expeditions & Fleet (अभियान)</a>
+            </li>
+            <li class="nav-item">
+              <a class="gov-nav-link" href="#govCircularsSection"><i class="fa-solid fa-file-shield"></i> Circulars & SOPs (परिपत्र)</a>
+            </li>
+          </ul>
+          <div class="py-2">
+            <a href="#loginForm" class="btn gov-login-nav-btn text-white">
+              <i class="fa-solid fa-lock me-1"></i> Officer Portal Login / अधिकारी प्रवेश
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Live Advisory Marquee Ticker -->
+      <div class="gov-alert-ticker">
+        <div class="container-fluid px-lg-5 d-flex align-items-center">
+          <span class="badge bg-danger text-uppercase px-2 py-1 me-2 flex-shrink-0">
+            <i class="fa-solid fa-bell me-1"></i> OFFICIAL ADVISORY / महत्वपूर्ण सूचना
+          </span>
+          <marquee behavior="scroll" direction="left" scrollamount="6" class="mb-0">
+            <strong>44th Indian Scientific Expedition to Antarctica (ISEA) underway:</strong> Blizzard Advisory for Maitri Base (Winds 42 knots, Ambient Temp -31°C, Protocol B activated) • Fuel & Cryo-storage replenishment at Dakshin Ice Camp verified at 100% sufficiency • Bharati Station satellite uplink operating on GSAT-7A transponder with zero packet loss • High-altitude atmospheric radar transmission active.
+          </marquee>
+        </div>
+      </div>
+
+      <!-- Main Government Hero Section with Official SSO Gateway -->
+      <section class="gov-hero-section" id="govMainContent">
+        <div class="container-fluid px-lg-5">
+          <div class="row align-items-center g-4">
+            
+            <!-- Left: Portal Overview & National Antarctic Stats -->
+            <div class="col-12 col-lg-7">
+              <div class="pe-lg-4">
+                <span class="gov-hero-badge mb-3">
+                  <i class="fa-solid fa-snowflake me-1"></i> Ministry of Earth Sciences • National Polar Programme
+                </span>
+                <h2 class="gov-hero-title mb-3">
+                  ICETRACK: Centralized Command & Logistics Management Portal
+                </h2>
+                <p class="gov-hero-desc mb-4">
+                  Welcome to the official operational mission gateway for the Indian Antarctic Programme. ICETRACK coordinates real-time atmospheric telemetry, heavy ice-class vessel shipping, cryogenic fuel storage safeguards, and emergency distress protocols across India's permanent and wintering bases: <strong>Maitri</strong>, <strong>Bharati</strong>, and <strong>Dakshin Ice Camp</strong>.
+                </p>
+
+                <!-- National Polar Mission Counters -->
+                <div class="row g-3 mb-4">
+                  <div class="col-6 col-sm-3">
+                    <div class="gov-stat-card">
+                      <div class="gov-stat-num">03</div>
+                      <div class="gov-stat-label">Active Polar Bases</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="gov-stat-card">
+                      <div class="gov-stat-num">48</div>
+                      <div class="gov-stat-label">Wintering Scientists</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="gov-stat-card">
+                      <div class="gov-stat-num">124 MT</div>
+                      <div class="gov-stat-label">Cryo-Fuel Reserves</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="gov-stat-card">
+                      <div class="gov-stat-num text-success">99.9%</div>
+                      <div class="gov-stat-label">SATCOM Telemetry</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quick Capability Links -->
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge bg-white text-dark border px-3 py-2"><i class="fa-solid fa-satellite text-primary me-1"></i> SATCOM Telemetry</span>
+                  <span class="badge bg-white text-dark border px-3 py-2"><i class="fa-solid fa-ship text-info me-1"></i> Maritime Fleet Logistics</span>
+                  <span class="badge bg-white text-dark border px-3 py-2"><i class="fa-solid fa-boxes-stacked text-warning me-1"></i> Cryo-Supply Inventory</span>
+                  <span class="badge bg-white text-dark border px-3 py-2"><i class="fa-solid fa-shield-heart text-danger me-1"></i> Emergency SOS Protocol</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Official NIC / Parichay Single Sign-On Gateway Card -->
+            <div class="col-12 col-lg-5">
+              <div class="gov-sso-card">
+                <div class="gov-sso-header d-flex align-items-center gap-3">
+                  <div class="rounded-circle bg-primary-subtle p-2 text-primary">
+                    <i class="fa-solid fa-shield-halved fa-2x"></i>
+                  </div>
+                  <div>
+                    <h3 class="gov-sso-title mb-0">राष्ट्रीय ध्रुवीय पोर्टल प्रवेश</h3>
+                    <div class="gov-sso-subtitle">Official Government Gateway • Parichay / NIC SSO</div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Login Alert Box -->
+                <div id="loginAlert" class="alert alert-danger py-2 px-3 small d-none mb-3" role="alert">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-circle-exclamation fs-5 flex-shrink-0"></i>
+                    <div id="loginAlertText" class="flex-grow-1"></div>
+                  </div>
+                </div>
+
+                <!-- Official Authentication Form -->
+                <form id="loginForm" autocomplete="off" onsubmit="event.preventDefault(); if (window.IceTrack) { window.IceTrack.handleLoginSubmit(); } return false;">
+                  <div class="mb-3">
+                    <label class="gov-form-label" for="loginEmail">
+                      <i class="fa-solid fa-id-card me-1 text-secondary"></i> Official Email ID
+                    </label>
+                    <input type="text" class="form-control gov-form-control" id="loginEmail" name="officialEmail" placeholder="Enter official email ID" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="gov-form-label" for="loginPassword">
+                      <i class="fa-solid fa-key me-1 text-secondary"></i> Security Password
+                    </label>
+                    <div class="input-group">
+                      <input type="password" class="form-control gov-form-control" id="loginPassword" name="officialPassword" placeholder="Enter security password" required autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false">
+                      <button class="btn btn-outline-secondary border-start-0" type="button" id="togglePasswordBtn" title="Toggle password display" style="border-color: #cbd5e1; cursor: pointer;" onclick="window.toggleLoginPassword(event)">
+                        <i class="fa-solid fa-eye" id="togglePasswordIcon" style="pointer-events: none;"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="gov-form-label" for="loginRole">
+                      <i class="fa-solid fa-user-shield me-1 text-secondary"></i> Authorization Role & Jurisdiction
+                    </label>
+                    <select class="form-select gov-form-control" id="loginRole">
+                      <option value="officer" data-i18n="roleOfficer">Field Officer (Maitri / Bharati / Dakshin)</option>
+                      <option value="manager" data-i18n="roleManager" selected>Expedition Manager (Operations Command)</option>
+                      <option value="admin" data-i18n="roleAdmin">System Administrator (MoES / NCPOR HQ)</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-gov-primary w-100 py-2 mb-3" data-i18n="loginBtn">
+                    <i class="fa-solid fa-lock me-2"></i> SECURE ACCESS / सुरक्षित प्रवेश
+                  </button>
+                </form>
+
+                <!-- Statutory Legal Disclaimer -->
+                <div class="gov-security-disclaimer">
+                  <i class="fa-solid fa-triangle-exclamation text-warning me-1"></i>
+                  <strong>LEGAL NOTICE:</strong> Authorized Government of India personnel and certified ISEA researchers only. Unauthorized access, tampering, or misuse of this system is punishable under Section 66 of the Information Technology Act, 2000. All sessions are cryptographically signed and IP-logged.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Portal Services Section -->
+      <section class="py-5 bg-white" id="govServicesSection">
+        <div class="container-fluid px-lg-5">
+          <div class="gov-section-header">
+            <h3 class="gov-section-title">प्रमुख प्रचालन सेवाएं • Core Polar Operations Modules</h3>
+            <p class="text-muted mb-0">Integrated scientific logistical subsystems deployed across the Indian Antarctic Sector.</p>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="gov-service-card">
+                <div class="gov-service-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                <h4 class="fs-6 fw-bold mb-2">Station Telemetry</h4>
+                <p class="small text-muted mb-0">Real-time meteorology, barometric pressure, wind velocity, and life-support habitat status at Maitri, Bharati, and Dakshin Ice Camp.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="gov-service-card">
+                <div class="gov-service-icon"><i class="fa-solid fa-ship"></i></div>
+                <h4 class="fs-6 fw-bold mb-2">Polar Vessel Tracking</h4>
+                <p class="small text-muted mb-0">Heavy ice-class cargo vessel routes from Cape Town and Goa to Prydz Bay, monitoring sea-ice thickness and berthing logistics.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="gov-service-card">
+                <div class="gov-service-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                <h4 class="fs-6 fw-bold mb-2">Cryogenic Fuel Logistics</h4>
+                <p class="small text-muted mb-0">Automated burn-rate computation for Aviation Turbine Fuel (ATF) and generator diesel to guarantee survival through the polar winter.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="gov-service-card">
+                <div class="gov-service-icon"><i class="fa-solid fa-truck-medical"></i></div>
+                <h4 class="fs-6 fw-bold mb-2">SAR & Emergency Distress</h4>
+                <p class="small text-muted mb-0">Direct satellite-linked emergency beacon monitoring with automated emergency airlift and medical triage response protocols.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Antarctic Stations Live Status Section -->
+      <section class="py-5 bg-light" id="govBasesSection">
+        <div class="container-fluid px-lg-5">
+          <div class="gov-section-header d-flex flex-wrap justify-content-between align-items-end">
+            <div>
+              <h3 class="gov-section-title">भारतीय अंटार्कटिक स्टेशन • Indian Antarctic Research Bases</h3>
+              <p class="text-muted mb-0">Live operational readiness, ambient meteorology, and scientific wintering manifests.</p>
+            </div>
+            <span class="badge bg-success px-3 py-2"><i class="fa-solid fa-circle-dot me-1"></i> Live Sensor Telemetry Active</span>
+          </div>
+
+          <div class="row g-4">
+            <!-- Maitri Station Card -->
+            <div class="col-12 col-md-4">
+              <div class="gov-station-card h-100">
+                <div class="gov-station-card-header">
+                  <h4 class="gov-station-name"><i class="fa-solid fa-landmark-dome text-primary me-2"></i>Maitri (मैत्री)</h4>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle">Operational</span>
+                </div>
+                <div class="gov-station-card-body">
+                  <div class="small text-muted mb-2"><i class="fa-solid fa-location-dot me-1 text-danger"></i> Schirmacher Oasis • Queen Maud Land</div>
+                  <div class="font-monospace text-secondary small mb-3">70°45′57″ S, 11°44′09″ E • Alt: 117m</div>
+                  <div class="gov-station-telemetry">
+                    <div>
+                      <small class="text-muted d-block">Ambient Temp</small>
+                      <strong class="text-primary fs-5">-26°C</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Wind Speed</small>
+                      <strong class="text-dark fs-5">34 kts</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Fuel Buffer</small>
+                      <strong class="text-success fs-5">88%</strong>
+                    </div>
+                  </div>
+                  <div class="small text-muted"><strong>Wintering Crew:</strong> 24 Scientists & Engineers (ISEA-44)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bharati Station Card -->
+            <div class="col-12 col-md-4">
+              <div class="gov-station-card h-100">
+                <div class="gov-station-card-header">
+                  <h4 class="gov-station-name"><i class="fa-solid fa-tower-broadcast text-primary me-2"></i>Bharati (भारती)</h4>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle">Optimal</span>
+                </div>
+                <div class="gov-station-card-body">
+                  <div class="small text-muted mb-2"><i class="fa-solid fa-location-dot me-1 text-danger"></i> Larsemann Hills • East Antarctica</div>
+                  <div class="font-monospace text-secondary small mb-3">69°24′28″ S, 76°11′14″ E • Alt: 35m</div>
+                  <div class="gov-station-telemetry">
+                    <div>
+                      <small class="text-muted d-block">Ambient Temp</small>
+                      <strong class="text-primary fs-5">-18°C</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Wind Speed</small>
+                      <strong class="text-dark fs-5">21 kts</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Fuel Buffer</small>
+                      <strong class="text-success fs-5">94%</strong>
+                    </div>
+                  </div>
+                  <div class="small text-muted"><strong>Wintering Crew:</strong> 28 Scientists & Oceanographers</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dakshin Ice Camp Card -->
+            <div class="col-12 col-md-4">
+              <div class="gov-station-card h-100">
+                <div class="gov-station-card-header">
+                  <h4 class="gov-station-name"><i class="fa-solid fa-campground text-primary me-2"></i>Dakshin Ice Camp</h4>
+                  <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Winter Alert</span>
+                </div>
+                <div class="gov-station-card-body">
+                  <div class="small text-muted mb-2"><i class="fa-solid fa-location-dot me-1 text-danger"></i> Inland Polar Plateau Outpost</div>
+                  <div class="font-monospace text-secondary small mb-3">72°12′00″ S, 40°20′00″ E • Alt: 2,800m</div>
+                  <div class="gov-station-telemetry">
+                    <div>
+                      <small class="text-muted d-block">Ambient Temp</small>
+                      <strong class="text-danger fs-5">-38°C</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Wind Speed</small>
+                      <strong class="text-danger fs-5">48 kts</strong>
+                    </div>
+                    <div>
+                      <small class="text-muted d-block">Fuel Buffer</small>
+                      <strong class="text-warning fs-5">82%</strong>
+                    </div>
+                  </div>
+                  <div class="small text-muted"><strong>Specialist Unit:</strong> 12 Cryo-Logistics Technicians</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Official Government Circulars & Gazettes Section -->
+      <section class="py-5 bg-white" id="govCircularsSection">
+        <div class="container-fluid px-lg-5">
+          <div class="gov-section-header">
+            <h3 class="gov-section-title">परिपत्र एवं कार्यालय आदेश • Official Circulars & Gazettes</h3>
+            <p class="text-muted mb-0">Official notifications and operational logistics clearances issued by MoES and NCPOR.</p>
+          </div>
+
+          <div class="table-responsive border rounded">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="width: 180px;">Circular No.</th>
+                  <th scope="col">Subject / Operational Order</th>
+                  <th scope="col" style="width: 180px;">Issuing Wing</th>
+                  <th scope="col" style="width: 130px;">Date</th>
+                  <th scope="col" style="width: 120px;" class="text-center">Gazette Copy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-monospace fw-bold text-primary small">ISEA-44/LOG/2026/01</td>
+                  <td><strong>Standard Operating Procedure (SOP) on Winter Over Emergency Fuel Rationing & Generator Redundancy at Dakshin Ice Camp</strong></td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">NCPOR Logistics</span></td>
+                  <td class="small text-muted">12 Sep 2026</td>
+                  <td class="text-center"><button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="alert('Viewing Official Gazette Copy: ISEA-44/LOG/2026/01')"><i class="fa-solid fa-file-pdf me-1"></i> PDF</button></td>
+                </tr>
+                <tr>
+                  <td class="font-monospace fw-bold text-primary small">MOES/POLAR/44-REV</td>
+                  <td><strong>44th Indian Scientific Expedition to Antarctica (ISEA) Medical Manifest & High-Altitude Physical Fitness Certification</strong></td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">MoES Polar Wing</span></td>
+                  <td class="small text-muted">04 Sep 2026</td>
+                  <td class="text-center"><button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="alert('Viewing Official Gazette Copy: MOES/POLAR/44-REV')"><i class="fa-solid fa-file-pdf me-1"></i> PDF</button></td>
+                </tr>
+                <tr>
+                  <td class="font-monospace fw-bold text-primary small">NCPOR/TELE/2026/19</td>
+                  <td><strong>Dedicated GSAT-7A Satellite Transponder Channel Allocation for Remote Weather Radar Sync across Antarctic Stations</strong></td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">SATCOM Division</span></td>
+                  <td class="small text-muted">28 Aug 2026</td>
+                  <td class="text-center"><button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="alert('Viewing Official Gazette Copy: NCPOR/TELE/2026/19')"><i class="fa-solid fa-file-pdf me-1"></i> PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Official Government Footer -->
+      <footer class="gov-portal-footer">
+        <div class="gov-tricolor-line"></div>
+        <div class="container-fluid px-lg-5 pt-4 pb-5">
+          <div class="row g-4">
+            <div class="col-12 col-md-4">
+              <h5 class="gov-footer-heading">Ministry of Earth Sciences</h5>
+              <p class="small mb-2 text-white-50">
+                Government of India<br>
+                Prithvi Bhavan, Lodhi Road<br>
+                New Delhi - 110003, India
+              </p>
+              <div class="small text-white-50">
+                <i class="fa-solid fa-envelope me-1"></i> secretary@moes.gov.in
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <h5 class="gov-footer-heading">NCPOR Headquarters</h5>
+              <p class="small mb-2 text-white-50">
+                National Centre for Polar and Ocean Research<br>
+                Headland Sada, Vasco-da-Gama<br>
+                Goa - 403804, India
+              </p>
+              <div class="small text-white-50">
+                <i class="fa-solid fa-phone me-1"></i> +91-832-2525600 | <i class="fa-solid fa-envelope me-1"></i> info@ncpor.res.in
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <h5 class="gov-footer-heading">Government Portals & Compliance</h5>
+              <ul class="gov-footer-links small">
+                <li><a href="https://www.india.gov.in" target="_blank" rel="noreferrer">National Portal of India (india.gov.in)</a></li>
+                <li><a href="https://www.mygov.in" target="_blank" rel="noreferrer">MyGov Citizen Engagement Portal</a></li>
+                <li><a href="https://moes.gov.in" target="_blank" rel="noreferrer">Ministry of Earth Sciences (MoES)</a></li>
+                <li><a href="https://ncpor.res.in" target="_blank" rel="noreferrer">National Centre for Polar and Ocean Research (NCPOR)</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <hr class="border-secondary my-4">
+
+          <div class="d-flex flex-wrap justify-content-between align-items-center small text-white-50">
+            <div class="mb-2 mb-md-0">
+              <a href="#" class="text-white-50 text-decoration-none me-3">Website Policies</a>
+              <a href="#" class="text-white-50 text-decoration-none me-3">Terms of Use</a>
+              <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
+              <a href="#" class="text-white-50 text-decoration-none me-3">Hyperlinking Policy</a>
+              <a href="#" class="text-white-50 text-decoration-none">Accessibility Statement</a>
+            </div>
+            <div>
+              Designed, Developed and Hosted by <strong>National Informatics Centre (NIC)</strong> • Certified by STQC
+            </div>
+          </div>
+        </div>
+
+        <div class="gov-footer-bottom text-center">
+          <div class="container-fluid">
+            © 2026 ICETRACK - Ministry of Earth Sciences, Government of India. All rights reserved. Last Updated: 18 Sep 2026.
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Main Dashboard Application (Command Center - Hidden until logged in) -->
+    <div id="appSection" class="app-layout d-none">
+      
+      <!-- Sidebar -->
+      <aside class="sidebar glass-panel-sidebar d-flex flex-column">
+        <div class="sidebar-header d-flex align-items-center p-3 border-bottom border-light-subtle">
+          <i class="fa-solid fa-snowflake text-cyan me-2 fs-4"></i>
+          <h4 class="mb-0 brand-title fs-5">ICETRACK</h4>
+        </div>
+        
+        <nav class="sidebar-nav flex-grow-1 p-3">
+          <ul class="nav flex-column gap-2">
+            <li class="nav-item"><a href="#" class="nav-link active" data-target="dashboard"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="navDashboard">Dashboard</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="expeditions"><i class="fa-solid fa-route"></i> <span data-i18n="navExpeditions">Expeditions</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="cargo"><i class="fa-solid fa-box-open"></i> <span data-i18n="navCargo">Cargo</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="inventory"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="navInventory">Inventory</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="personnel"><i class="fa-solid fa-users-gear"></i> <span data-i18n="navPersonnel">Personnel</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="map"><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="navMap">Map View</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="emergency"><i class="fa-solid fa-truck-medical"></i> <span data-i18n="navEmergency">Emergency</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-target="analytics"><i class="fa-solid fa-chart-line"></i> <span data-i18n="navAnalytics">Analytics</span></a></li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer p-3 border-top border-light-subtle text-center">
+           <div class="mb-2 user-info">
+              <small class="text-muted d-block" data-i18n="loggedInAs">Logged in as</small>
+              <div id="displayOfficerName" class="fw-bold text-dark fs-6">Abhigyan</div>
+              <strong id="displayRole" class="text-cyan small d-block">Chief Polar Commander</strong>
+              <div id="displayOfficerEmail" class="text-muted font-monospace mt-1" style="font-size: 0.72rem;">Abhigyan@gmail.com</div>
+           </div>
+           <button class="btn btn-sm btn-outline-danger w-100 mt-2" id="oldLogoutBtn" data-i18n="logoutBtn">
+             <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+           </button>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Retro-Government Top Access Bar (Inspired by Uploaded Mockup) -->
+        <header class="gov-top-access-bar mb-3">
+          <!-- Upper Row: Primary System Access Strip -->
+          <div class="gov-top-access-row">
+            <div class="gov-access-brand-box">
+              <span class="brand-icon-frame"><i class="fa-solid fa-snowflake"></i></span>
+              <span>ICETRACK</span>
+            </div>
+
+            <ul class="gov-top-nav-tabs">
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link active" data-target="dashboard">
+                  <i class="fa-solid fa-house"></i>
+                  <span data-i18n="navDashboard">Dashboard</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="map">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span data-i18n="navMap">Live Map</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="cargo">
+                  <i class="fa-solid fa-ship"></i>
+                  <span data-i18n="navCargo">Fleet & Cargo</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="expeditions">
+                  <i class="fa-solid fa-mountain-sun"></i>
+                  <span data-i18n="navExpeditions">Polar Bases</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="inventory">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                  <span data-i18n="navInventory">Inventory</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="personnel">
+                  <i class="fa-solid fa-users-gear"></i>
+                  <span data-i18n="navPersonnel">Personnel</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="emergency">
+                  <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                  <span data-i18n="navEmergency">Emergency SOS</span>
+                </button>
+              </li>
+              <li class="gov-top-nav-item">
+                <button class="gov-top-nav-btn nav-link" data-target="analytics">
+                  <i class="fa-solid fa-chart-line"></i>
+                  <span data-i18n="navAnalytics">Analytics</span>
+                </button>
+              </li>
+            </ul>
+
+            <div class="gov-top-access-utils">
+              <span class="badge bg-success bg-opacity-10 text-success border border-success-subtle d-none d-xl-inline-flex align-items-center gap-1" style="font-size: 0.7rem; font-weight: 700;">
+                <i class="fa-solid fa-satellite-dish"></i> GSAT-7A UPLINK
+              </span>
+              <!-- Active Officer Badge in Topbar -->
+              <div class="d-flex align-items-center gap-2" id="topbarUserBadge">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 28px; height: 28px; font-size: 0.8rem;" id="topbarUserAvatar">A</div>
+                <div class="text-start d-none d-xxl-block" style="line-height: 1.1;">
+                  <div class="fw-bold text-dark small" id="topbarUserName">Abhigyan</div>
+                  <div class="text-muted" style="font-size: 0.65rem;" id="topbarUserEmail">Abhigyan@gmail.com</div>
+                </div>
+              </div>
+              <label class="ios-switch mb-0" id="topLangSwitchBtn" title="Switch English/Hindi">
+                <input type="checkbox" id="topLangSwitchCheckbox">
+                <span class="ios-slider">
+                  <span class="ios-label eng">ENG</span>
+                  <span class="ios-label hin">HIN</span>
+                </span>
+              </label>
+              <button class="btn btn-sm btn-outline-dark fw-bold px-2 py-1" id="logoutBtn" style="font-size: 0.72rem; letter-spacing: 0.5px;">
+                <i class="fa-solid fa-right-from-bracket me-1"></i>LOGOUT
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- View Container -->
+        <div class="views-container px-3 px-xl-4 pb-4 w-100">
+          
+          <!-- Dashboard View (Full Size Minimalist Wireframe Archetype) -->
+          <div id="view-dashboard" class="view-section active">
+            
+            <div class="wireframe-container" id="wireframeHomepage">
+              <!-- Hero Section with Polar Ocean Ship & Glaciers Banner -->
+              <section class="wireframe-hero" id="homepageHeroSection">
+                <!-- Background Image: Ship sailing in the polar region ocean through glaciers -->
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Icebergs%2C_Mountains%2C_Glacier%2C_Cruise_Ship_in_Paradise_Bay%2C_Antarctica_-_panoramio.jpg"
+                  alt="Polar expedition vessel sailing in the polar region ocean through glaciers and icebergs"
+                  class="wireframe-hero-bg-img"
+                  id="heroBannerImg"
+                  referrerpolicy="no-referrer"
+                />
+                <div class="wireframe-hero-overlay"></div>
+
+                <div class="wireframe-hero-content">
+                  <h1 class="wireframe-hero-title">start your adventure</h1>
+                  <p class="wireframe-hero-sub">National Polar Operations & Logistics Command • Ministry of Earth Sciences</p>
+                </div>
+              </section>
+
+              <!-- Body Section -->
+              <div class="wireframe-body-section">
+                <!-- Row 1: Carousel / Slider (Left) & Sidebar (Right) -->
+                <div class="row g-3 mb-4">
+                  <div class="col-lg-8">
+                    <div class="wireframe-carousel-card">
+                      <!-- Navigation Arrows -->
+                      <button class="wireframe-carousel-arrow wireframe-arrow-left" id="wireframePrevBtn" onclick="window.IceTrack.prevWireframeSlide()" title="Previous Mission">
+                        <i class="fa-solid fa-chevron-left"></i>
+                      </button>
+                      <button class="wireframe-carousel-arrow wireframe-arrow-right" id="wireframeNextBtn" onclick="window.IceTrack.nextWireframeSlide()" title="Next Mission">
+                        <i class="fa-solid fa-chevron-right"></i>
+                      </button>
+
+                      <!-- Interactive Slide Display -->
+                      <div class="wireframe-slide-area" id="wireframeSlideDisplay">
+                        <!-- Populated by JavaScript -->
+                      </div>
+
+                      <!-- Dot Pagination -->
+                      <div class="wireframe-carousel-dots" id="wireframeCarouselDots">
+                        <button class="wireframe-dot active" onclick="window.IceTrack.setWireframeSlide(0)"></button>
+                        <button class="wireframe-dot" onclick="window.IceTrack.setWireframeSlide(1)"></button>
+                        <button class="wireframe-dot" onclick="window.IceTrack.setWireframeSlide(2)"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right Column: Sidebar (Recent Articles / Bulletins) -->
+                  <div class="col-lg-4">
+                    <div class="wireframe-sidebar-card">
+                      <div class="wireframe-sidebar-title d-flex justify-content-between align-items-center">
+                        <span>Recent Bulletins</span>
+                        <i class="fa-solid fa-bullhorn text-muted" style="font-size: 0.85rem;"></i>
+                      </div>
+                      <ul class="wireframe-sidebar-list">
+                        <li class="wireframe-sidebar-item">
+                          <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-danger text-white" style="font-size: 0.65rem;">BLIZZARD ALERT</span>
+                            <small class="text-muted font-monospace">18 Sep</small>
+                          </div>
+                          <div class="fw-bold text-dark">Maitri Station Advisory</div>
+                          <small class="text-muted">Katabatic winds gusting to 48 kts. Outdoor core drilling restricted.</small>
+                        </li>
+                        <li class="wireframe-sidebar-item">
+                          <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-primary text-white" style="font-size: 0.65rem;">VESSEL TRANSIT</span>
+                            <small class="text-muted font-monospace">17 Sep</small>
+                          </div>
+                          <div class="fw-bold text-dark">RV Sagar Nidhi Departure</div>
+                          <small class="text-muted">Mormugao Berth cleared carrying 124 MT cryo-fuel & wintering supplies.</small>
+                        </li>
+                        <li class="wireframe-sidebar-item">
+                          <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-success text-white" style="font-size: 0.65rem;">SATCOM LINK</span>
+                            <small class="text-muted font-monospace">16 Sep</small>
+                          </div>
+                          <div class="fw-bold text-dark">GSAT-7A Relay Active</div>
+                          <small class="text-muted">High-latitude telemetry transponder operating at 99.98% packet delivery.</small>
+                        </li>
+                        <li class="wireframe-sidebar-item">
+                          <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-info text-white" style="font-size: 0.65rem;">TELEMETRY FEED</span>
+                            <small class="text-muted font-monospace">15 Sep</small>
+                          </div>
+                          <div class="fw-bold text-dark">Dakshin Ice Field Status</div>
+                          <small class="text-muted">Automated sub-zero surface sensors and micro-seismic array functioning nominally.</small>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Row 2: Article Block with Hyperlink & Hover State Box -->
+                <div class="wireframe-article-block">
+                  <h3 class="wireframe-article-headline">National Polar Science & Logistics Framework</h3>
+                  <p class="wireframe-article-text">
+                    The Indian Scientific Expedition to Antarctica (ISEA-44) coordinates ongoing scientific research across Maitri, Bharati, and high-plateau Dakshin Camp. Mission controllers oversee vessel routing, fuel rationing, cryogenic life support, and SATCOM downlinks under strict government protocols.
+                  </p>
+                  <p class="wireframe-article-text mb-0">
+                    Mission controllers can review real-time AIS maritime transponders, check station life-support reserves, or
+                    <span class="wireframe-hyperlink" onclick="window.IceTrack.switchView('map')">
+                      explore the tactical geospatial corridor ↗
+                    </span>
+                    connecting Indian departure ports with Antarctica.
+                  </p>
+                </div>
+
+                <!-- Row 3: 3 Cards Grid Matching the Uploaded Diagram -->
+                <div class="wireframe-cards-grid">
+                  <!-- Card 1: Image Thumbnail + Text + Button -->
+                  <div class="wireframe-col-card">
+                    <div class="wireframe-card-thumb">
+                      <i class="fa-solid fa-ship"></i>
+                    </div>
+                    <div class="wireframe-card-body">
+                      <div>
+                        <h6>Maritime Fleet & Vessel Shipping</h6>
+                        <p>Track polar ice-class research vessels, berth clearances at Mormugao, and Southern Ocean routes.</p>
+                      </div>
+                      <button class="btn btn-sm btn-outline-dark fw-bold w-100" onclick="window.IceTrack.switchView('cargo')">
+                        View Fleet Cargo ↗
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Card 2: Bordered Text Card + Button -->
+                  <div class="wireframe-col-card">
+                    <div class="wireframe-card-body">
+                      <div>
+                        <div class="badge bg-warning text-dark mb-2" style="font-size: 0.68rem; font-weight: 700;">BUFFER: 275 DAYS</div>
+                        <h6>Cryogenic Life-Support Reserves</h6>
+                        <p>Audit 124 MT arctic fuel buffers, diesel generators, electrical grids, and critical life-support heating systems.</p>
+                      </div>
+                      <button class="btn btn-sm btn-outline-dark fw-bold w-100" onclick="window.IceTrack.switchView('inventory')">
+                        Inspect Inventory ↗
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Card 3: Image Thumbnail + Text + Button -->
+                  <div class="wireframe-col-card">
+                    <div class="wireframe-card-thumb">
+                      <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <div class="wireframe-card-body">
+                      <div>
+                        <h6>Station Personnel & Scientists</h6>
+                        <p>Access the authorized manifest of 48 wintering scientists, glaciologists, and medical teams deployed on station.</p>
+                      </div>
+                      <button class="btn btn-sm btn-outline-dark fw-bold w-100" onclick="window.IceTrack.switchView('personnel')">
+                        View Personnel ↗
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Minimalist 3-Column Footer Matching Wireframe -->
+              <footer class="wireframe-footer">
+                <div>
+                  <strong>Contact:</strong>
+                  <div>National Centre for Polar and Ocean Research (NCPOR)</div>
+                  <div class="text-muted">Ministry of Earth Sciences, Headland Sada, Goa 403804</div>
+                </div>
+
+                <div class="wireframe-connect-icons">
+                  <button class="wireframe-connect-icon" title="GSAT-7A Satcom Uplink" onclick="window.IceTrack.triggerSatcomPing()"><i class="fa-solid fa-satellite-dish"></i></button>
+                  <button class="wireframe-connect-icon" title="Official Gazettes" onclick="window.IceTrack.showGovGazetteModal()"><i class="fa-solid fa-file-lines"></i></button>
+                  <button class="wireframe-connect-icon" title="Emergency Operations" onclick="window.IceTrack.switchView('emergency')"><i class="fa-solid fa-shield-halved"></i></button>
+                  <button class="wireframe-connect-icon" title="NCPOR Portal" onclick="window.open('https://ncpor.res.in', '_blank')"><i class="fa-solid fa-globe"></i></button>
+                </div>
+
+                <div class="text-md-end">
+                  <div><strong>Copyright © 2026 ICETRACK</strong></div>
+                  <div class="text-muted">National Polar Operations Command • Govt. of India</div>
+                </div>
+              </footer>
+            </div>
+
+          </div>
+
+          <!-- Offcanvas Drawer for Wireframe Hamburger Menu -->
+          <div class="wireframe-drawer-backdrop" id="wireframeDrawerBackdrop" onclick="window.IceTrack.closeWireframeDrawer()"></div>
+          <div class="wireframe-drawer" id="wireframeDrawer">
+            <div class="wireframe-drawer-header">
+              <span class="fw-bold"><i class="fa-solid fa-snowflake text-primary me-2"></i> ICETRACK Modules</span>
+              <button class="btn btn-sm btn-close" onclick="window.IceTrack.closeWireframeDrawer()"></button>
+            </div>
+            <div class="wireframe-drawer-body">
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('dashboard')">
+                <i class="fa-solid fa-house text-primary"></i> Dashboard
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('map')">
+                <i class="fa-solid fa-map-location-dot text-info"></i> Live Geospatial Map
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('cargo')">
+                <i class="fa-solid fa-ship text-success"></i> Fleet & Cargo Logistics
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('expeditions')">
+                <i class="fa-solid fa-mountain-sun text-warning"></i> Polar Bases & Expeditions
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('inventory')">
+                <i class="fa-solid fa-boxes-stacked text-secondary"></i> Cryo-Fuel Inventory
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('personnel')">
+                <i class="fa-solid fa-users-gear text-dark"></i> Personnel Movement
+              </div>
+              <div class="wireframe-drawer-link text-danger" onclick="window.IceTrack.drawerNavigate('emergency')">
+                <i class="fa-solid fa-triangle-exclamation text-danger"></i> Emergency SOS
+              </div>
+              <div class="wireframe-drawer-link" onclick="window.IceTrack.drawerNavigate('analytics')">
+                <i class="fa-solid fa-chart-line text-primary"></i> Satcom Analytics
+              </div>
+              <hr class="my-3">
+              <button class="btn btn-outline-danger w-100 fw-bold" onclick="window.IceTrack.logout()">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+              </button>
+            </div>
+          </div>
+
+
+          <!-- Expeditions View -->
+          <div id="view-expeditions" class="view-section d-none">
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="glass-panel p-4 h-100">
+                  <h5 class="mb-4" data-i18n="planExpedition">Plan Expedition</h5>
+                  <form id="expeditionForm">
+                    <div class="mb-3">
+                      <label class="form-label text-muted" data-i18n="lblMissionName">Mission Name</label>
+                      <input type="text" class="form-control glass-input" id="expName" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-muted" data-i18n="lblTargetStation">Target Station</label>
+                      <select class="form-select glass-input" id="expStation" required>
+                        <option value="Dakshin Ice Camp" selected>Dakshin Ice Camp</option>
+                        <option value="Maitri">Maitri</option>
+                        <option value="Bharati">Bharati</option>
+                      </select>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label text-muted" data-i18n="lblStartDate">Start Date</label>
+                        <input type="date" class="form-control glass-input" id="expStart" required>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label text-muted" data-i18n="lblEndDate">End Date</label>
+                        <input type="date" class="form-control glass-input" id="expEnd" required>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-muted" data-i18n="lblShipName">Vessel/Ship</label>
+                      <select class="form-select glass-input" id="expShip">
+                        <option value="RV Sagar Nidhi">RV Sagar Nidhi</option>
+                        <option value="MV Polar India">MV Polar India</option>
+                        <option value="Air Support">Air Support</option>
+                      </select>
+                    </div>
+                    <div class="mb-4">
+                       <label class="form-label text-muted" data-i18n="lblPriority">Priority</label>
+                       <select class="form-select glass-input" id="expPriority">
+                         <option value="Standard">Standard</option>
+                         <option value="High">High</option>
+                         <option value="Critical">Critical</option>
+                       </select>
+                    </div>
+                    <button type="submit" class="btn btn-cyan w-100" data-i18n="btnCreateMission">Create Mission</button>
+                  </form>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="glass-panel p-4 h-100">
+                  <h5 class="mb-4" data-i18n="activeMissions">Active Missions</h5>
+                  <div class="table-responsive">
+                    <table class="table table-light table-hover table-glass" id="expeditionTable">
+                      <thead>
+                        <tr>
+                          <th data-i18n="colName">Name</th>
+                          <th data-i18n="colStation">Station</th>
+                          <th data-i18n="colVessel">Vessel</th>
+                          <th data-i18n="colTimeline">Timeline</th>
+                          <th data-i18n="colPriority">Priority</th>
+                          <th class="text-end">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="expeditionTableBody">
+                        <!-- Rendered dynamically -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cargo View -->
+          <div id="view-cargo" class="view-section d-none">
+            <!-- Cargo Metrics Strip -->
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Total Consignments</div>
+                  <div class="fs-4 fw-bold text-dark" id="cargoMetricTotal">8</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Gross Payload Mass</div>
+                  <div class="fs-4 fw-bold text-cyan" id="cargoMetricWeight">7.2 MT</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Active En Route</div>
+                  <div class="fs-4 fw-bold text-warning" id="cargoMetricTransit">3</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Station Delivered</div>
+                  <div class="fs-4 fw-bold text-success" id="cargoMetricDelivered">1</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-panel p-4">
+               <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                  <div>
+                    <h5 class="mb-1" data-i18n="cargoTracking">Cargo Logistics Tracking</h5>
+                    <p class="text-muted small mb-0">Antarctic Maritime Supply Corridors & Staging Manifests</p>
+                  </div>
+                  <div class="d-flex gap-2 flex-wrap">
+                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCargo">
+                       <i class="fa-solid fa-plus me-1"></i> Register Consignment
+                     </button>
+                     <button class="btn btn-sm btn-cyan" id="btnUpdateCargo" data-i18n="btnSimulateUpdate">
+                       <i class="fa-solid fa-route me-1"></i> Simulate Progress
+                     </button>
+                     <button class="btn btn-sm btn-outline-secondary" id="btnExportCargoCsv" title="Export Manifest as CSV">
+                       <i class="fa-solid fa-file-csv me-1"></i> Export Manifest
+                     </button>
+                  </div>
+               </div>
+
+               <!-- Filters Bar -->
+               <div class="row g-2 mb-3 align-items-center">
+                 <div class="col-12 col-md-5 col-lg-4">
+                   <div class="input-group input-group-sm">
+                     <span class="input-group-text bg-transparent border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                     <input type="text" class="form-control glass-input border-start-0" id="cargoSearchInput" placeholder="Filter by consignment, origin, or ID...">
+                   </div>
+                 </div>
+                 <div class="col-6 col-md-3 col-lg-2">
+                   <select class="form-select form-select-sm glass-input" id="cargoFilterStatus">
+                     <option value="all">All Statuses</option>
+                     <option value="Preparing">Preparing</option>
+                     <option value="Loaded">Loaded</option>
+                     <option value="In Transit">In Transit</option>
+                     <option value="Delivered">Delivered</option>
+                   </select>
+                 </div>
+                 <div class="col-6 col-md-3 col-lg-2">
+                   <select class="form-select form-select-sm glass-input" id="cargoFilterDestination">
+                     <option value="all">All Stations</option>
+                     <option value="Maitri">Maitri</option>
+                     <option value="Bharati">Bharati</option>
+                     <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                   </select>
+                 </div>
+                 <div class="col-12 col-md-12 col-lg-4 text-lg-end text-muted small" id="cargoFilterCount">
+                   Showing all records
+                 </div>
+               </div>
+
+               <div class="table-responsive">
+                 <table class="table table-light table-hover table-glass align-middle">
+                   <thead>
+                     <tr>
+                       <th data-i18n="colCargoId">Cargo ID</th>
+                       <th data-i18n="colItem">Item Description</th>
+                       <th data-i18n="colWeight">Weight (kg)</th>
+                       <th data-i18n="colRoute">Staging Route</th>
+                       <th data-i18n="colStatus">Status</th>
+                       <th data-i18n="colProgress">Progress</th>
+                       <th class="text-end">Actions</th>
+                     </tr>
+                   </thead>
+                   <tbody id="cargoTableBody">
+                      <!-- Rendered dynamically -->
+                   </tbody>
+                 </table>
+               </div>
+            </div>
+          </div>
+
+          <!-- Inventory View -->
+          <div id="view-inventory" class="view-section d-none">
+            <!-- Inventory Metrics Strip -->
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Monitored Items</div>
+                  <div class="fs-4 fw-bold text-dark" id="invMetricTotal">8</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Critical Shortages</div>
+                  <div class="fs-4 fw-bold text-danger" id="invMetricCritical">1</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Moderate Buffers</div>
+                  <div class="fs-4 fw-bold text-warning" id="invMetricModerate">3</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3">
+                  <div class="text-muted small fw-semibold text-uppercase">Optimal Reserves</div>
+                  <div class="fs-4 fw-bold text-success" id="invMetricOptimal">4</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header and Action Controls -->
+            <div class="glass-panel p-3 mb-4">
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                  <h5 class="mb-1" data-i18n="inventoryTitle">Polar Station Reserves & Cryogenic Inventory</h5>
+                  <p class="text-muted small mb-0">Autonomous Life Support, Polar Fuels & Extreme Weather Stock Monitoring</p>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddInventory">
+                    <i class="fa-solid fa-plus me-1"></i> Add Stock Item
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary" id="btnExportInventoryCsv" title="Export Stock Report as CSV">
+                    <i class="fa-solid fa-file-csv me-1"></i> Export Stock CSV
+                  </button>
+                </div>
+              </div>
+
+              <!-- Inventory Filter Strip -->
+              <div class="row g-2 mt-2 align-items-center">
+                <div class="col-12 col-md-5 col-lg-4">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-transparent border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                    <input type="text" class="form-control glass-input border-start-0" id="invSearchInput" placeholder="Filter by item, category, or officer...">
+                  </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                  <select class="form-select form-select-sm glass-input" id="invFilterStation">
+                    <option value="all">All Stations</option>
+                    <option value="Maitri">Maitri</option>
+                    <option value="Bharati">Bharati</option>
+                    <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <select class="form-select form-select-sm glass-input" id="invFilterRisk">
+                    <option value="all">All Risk Levels</option>
+                    <option value="High">High Risk (Critical)</option>
+                    <option value="Moderate">Moderate Risk</option>
+                    <option value="Low">Low Risk (Optimal)</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-4 text-lg-end text-muted small" id="invFilterCount">
+                  Showing all monitored reserves
+                </div>
+              </div>
+            </div>
+
+            <div class="alert alert-danger glass-panel-danger d-none mb-4" id="inventoryAlertBox">
+               <i class="fa-solid fa-triangle-exclamation me-2 pulse-anim"></i>
+               <span id="inventoryAlertText">Warning: Some stocks are below safety threshold!</span>
+            </div>
+
+            <div class="row g-4" id="inventoryCardsContainer">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Personnel View -->
+          <div id="view-personnel" class="view-section d-none">
+             <div class="glass-panel p-4">
+               <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                 <div>
+                   <h5 class="mb-0" data-i18n="personnelMovement">Personnel Movement</h5>
+                   <small class="text-muted">Station deployment manifests & polar personnel rosters</small>
+                 </div>
+                 <div class="d-flex gap-2">
+                   <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddPersonnel">
+                     <i class="fa-solid fa-user-plus me-1"></i> Add Personnel
+                   </button>
+                   <select class="form-select form-select-sm glass-input" id="filterPersonnelStation">
+                     <option value="all" data-i18n="optAllStations">All Stations</option>
+                     <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                     <option value="Maitri">Maitri</option>
+                     <option value="Bharati">Bharati</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="table-responsive">
+                 <table class="table table-light table-hover table-glass align-middle">
+                   <thead>
+                     <tr>
+                       <th data-i18n="colName">Name</th>
+                       <th data-i18n="colRole">Role</th>
+                       <th data-i18n="colTeam">Team</th>
+                       <th data-i18n="colStation">Station</th>
+                       <th data-i18n="colStatus">Status</th>
+                       <th data-i18n="colClearance">Clearance</th>
+                       <th class="text-end">Actions</th>
+                     </tr>
+                   </thead>
+                   <tbody id="personnelTableBody">
+                     <!-- Rendered dynamically -->
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+          </div>
+
+          <!-- Map View: Geospatial Command (Detailed Map & 3D Polar Globe) -->
+          <div id="view-map" class="view-section d-none">
+             <div class="glass-panel p-4 h-100 d-flex flex-column">
+                
+                <!-- Map Header & Mode Selector -->
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                  <div>
+                    <h5 class="mb-1 text-dark fw-bold d-flex align-items-center gap-2">
+                      <i class="fa-solid fa-earth-americas text-primary"></i>
+                      <span id="mapMainHeading">Polar Operations Geospatial Command</span>
+                      <span class="badge bg-primary text-white ms-2" style="font-size: 0.68rem;">INDIA & ANCTARCTICA CORRIDOR</span>
+                    </h5>
+                    <small class="text-muted" id="mapSubHeading">High-precision maritime cartography & rotatable 3D globe tracking 8 Indian embarkation ports and Antarctic scientific stations.</small>
+                  </div>
+                  
+                  <div class="d-flex align-items-center gap-3 flex-wrap">
+                     <!-- Mode Switcher: Detailed Map vs 3D Globe -->
+                     <div class="btn-group btn-group-sm shadow-sm" role="group" id="mapModeSwitcher">
+                        <button type="button" class="btn btn-primary fw-bold px-3 active" id="btnModeDetailed" title="Switch to High-Resolution Detailed Tactical Map">
+                          <i class="fa-solid fa-map me-1"></i> Detailed Map
+                        </button>
+                        <button type="button" class="btn btn-outline-primary fw-bold px-3" id="btnModeGlobe" title="Switch to 3D Rotatable Polar Globe">
+                          <i class="fa-solid fa-earth-americas me-1"></i> 3D Globe
+                        </button>
+                     </div>
+
+                     <!-- Telemetry Legend Badges -->
+                     <div class="d-flex flex-wrap align-items-center gap-1 text-sm">
+                        <span class="badge bg-warning bg-opacity-25 text-dark border border-warning-subtle px-2 py-1">
+                          <i class="fa-solid fa-anchor text-warning me-1"></i> 8 Ports
+                        </span>
+                        <span class="badge bg-info bg-opacity-25 text-dark border border-info-subtle px-2 py-1">
+                          <i class="fa-solid fa-snowflake text-info me-1"></i> 4 Bases
+                        </span>
+                        <span class="badge bg-success bg-opacity-25 text-dark border border-success-subtle px-2 py-1">
+                          <i class="fa-solid fa-ship text-success me-1"></i> 3 Ships
+                        </span>
+                     </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Controls Bar -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3 bg-white bg-opacity-80 p-2 rounded-3 border border-light-subtle shadow-sm">
+                   <!-- Focus Presets -->
+                   <div class="d-flex align-items-center gap-1 flex-wrap">
+                      <span class="text-muted small fw-semibold me-1"><i class="fa-solid fa-crosshairs me-1"></i>Focus:</span>
+                      <button class="btn btn-xs btn-outline-primary rounded-pill px-3 fw-semibold globe-preset-btn" id="btnFocusIndia" title="Center on Indian Ports">
+                        <i class="fa-solid fa-anchor me-1 text-warning"></i> Indian Ports
+                      </button>
+                      <button class="btn btn-xs btn-outline-info rounded-pill px-3 fw-semibold globe-preset-btn" id="btnFocusAntarctica" title="Center on Antarctic Stations & South Pole">
+                        <i class="fa-solid fa-snowflake me-1 text-info"></i> Antarctica
+                      </button>
+                      <button class="btn btn-xs btn-outline-secondary rounded-pill px-3 fw-semibold globe-preset-btn" id="btnFocusCorridor" title="Show India-Antarctica Expedition Shipping Passage">
+                        <i class="fa-solid fa-route me-1 text-primary"></i> Polar Corridor
+                      </button>
+                      <button class="btn btn-xs btn-outline-dark rounded-pill px-2 fw-semibold" id="btnResetGlobe" title="Reset Camera View">
+                        <i class="fa-solid fa-arrow-rotate-left me-1"></i> Reset
+                      </button>
+                   </div>
+
+                   <!-- Mode Specific Controls -->
+                   <div class="d-flex align-items-center gap-2 flex-wrap">
+                      <!-- Leaflet Layer Selectors (including Google Maps layers) -->
+                      <div class="btn-group btn-group-sm" id="leafletLayerGroup">
+                        <button class="btn btn-xs btn-outline-primary active fw-semibold" id="btnLayerGoogleHybrid" title="Google Maps Satellite Hybrid with Detailed Internal Roads & Berths"><i class="fa-brands fa-google me-1 text-danger"></i> Google Sat</button>
+                        <button class="btn btn-xs btn-outline-secondary fw-semibold" id="btnLayerGoogleRoad" title="Google Maps Road & Internal Infrastructure"><i class="fa-solid fa-road me-1 text-primary"></i> Google Roads</button>
+                        <button class="btn btn-xs btn-outline-secondary fw-semibold" id="btnLayerOcean" title="Nautical Bathymetry Ocean Layer"><i class="fa-solid fa-water me-1 text-info"></i> Ocean</button>
+                        <button class="btn btn-xs btn-outline-secondary fw-semibold" id="btnLayerVoyager" title="High-Contrast Street & Port Berths"><i class="fa-solid fa-map-pin me-1 text-warning"></i> Ports</button>
+                        <button class="btn btn-xs btn-outline-secondary fw-semibold" id="btnLayerSatellite" title="Satellite Earth Imagery"><i class="fa-solid fa-satellite me-1 text-success"></i> Satellite</button>
+                      </div>
+
+                      <!-- 3D Globe Specific Controls (visible in globe mode) -->
+                      <div class="d-flex align-items-center gap-1 d-none" id="globeSpecificControls">
+                        <button class="btn btn-xs btn-dark rounded-pill px-3 fw-semibold" id="btnToggleAutoRotate" title="Toggle gentle continuous rotation">
+                          <i class="fa-solid fa-play me-1" id="autoRotateIcon"></i> <span id="autoRotateLabel">Auto-Rotate</span>
+                        </button>
+                        <button class="btn btn-xs btn-outline-secondary rounded-pill px-2" id="btnToggleGraticule" title="Toggle Lat/Long Grid Lines">
+                          <i class="fa-solid fa-border-none me-1"></i> Grid
+                        </button>
+                      </div>
+
+                      <div class="btn-group btn-group-sm">
+                         <button class="btn btn-outline-secondary btn-sm" id="btnZoomIn" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+                         <button class="btn btn-outline-secondary btn-sm" id="btnZoomOut" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+                      </div>
+                   </div>
+                </div>
+                
+                <!-- Main Geospatial Stage (Houses Detailed Leaflet Map & 3D D3 Globe) -->
+                <div class="custom-map-container flex-grow-1 position-relative rounded-4 overflow-hidden border border-light-subtle shadow-sm" id="simulatedMap" style="min-height: 540px; background: radial-gradient(circle at 50% 50%, #0d1e3a 0%, #071224 80%, #030813 100%);">
+                   
+                   <!-- Instruction Hint Badge -->
+                   <div class="position-absolute top-0 start-50 translate-middle-x mt-2 px-3 py-1 rounded-pill bg-dark bg-opacity-75 text-white small shadow-sm pointer-events-none" id="mapModeHint" style="z-index: 1000; font-size: 0.72rem; letter-spacing: 0.3px;">
+                     <i class="fa-solid fa-circle-info text-warning me-1"></i> Interactive Detailed Map &bull; Click any port or station for intelligence dossier &bull; Zoom into berths
+                   </div>
+
+                   <!-- Container 1: High-Resolution Detailed Tactical Map (Leaflet) -->
+                   <div id="leafletMapContainer" class="position-absolute w-100 h-100" style="top:0;left:0; z-index: 5;"></div>
+
+                   <!-- Container 2: Rotatable 3D Polar Globe (D3.js Orthographic) -->
+                   <div id="d3MapContainer" class="position-absolute w-100 h-100 d-none" style="top:0;left:0; cursor: grab; z-index: 6;"></div>
+                   
+                   <!-- Floating Intelligence Dossier / Port Inspector Card -->
+                   <div class="position-absolute bottom-0 end-0 m-3 glass-panel p-3 shadow-lg rounded-3 globe-inspector-card" id="globeInspectorCard" style="width: 330px; max-width: 90%; z-index: 1050; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(2, 132, 199, 0.35);">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                          <span class="badge bg-warning text-dark" id="inspBadge" style="font-size: 0.65rem;">PRIMARY BASE</span>
+                          <h6 class="mb-0 fw-bold text-dark mt-1" id="inspTitle">Mormugao Port (Goa)</h6>
+                          <small class="text-muted" id="inspSubtitle">NCPOR Polar Expedition Headquarters</small>
+                        </div>
+                        <button class="btn btn-sm btn-link text-muted p-0" id="closeInspectorBtn" title="Minimize Details"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+
+                      <div class="border-top border-bottom py-2 my-2 text-sm" style="font-size: 0.78rem;">
+                         <div class="d-flex justify-content-between mb-1">
+                           <span class="text-muted"><i class="fa-solid fa-location-crosshairs text-primary me-1"></i>Coordinates:</span>
+                           <span class="fw-semibold text-dark font-monospace" id="inspCoords">15.412° N, 73.801° E</span>
+                         </div>
+                         <div class="d-flex justify-content-between mb-1">
+                           <span class="text-muted"><i class="fa-solid fa-compass text-info me-1"></i>Antarctica Dist:</span>
+                           <span class="fw-semibold text-primary" id="inspDist">~9,450 km (5,100 NM)</span>
+                         </div>
+                         <div class="d-flex justify-content-between">
+                           <span class="text-muted"><i class="fa-solid fa-shield-halved text-success me-1"></i>Clearance:</span>
+                           <span class="fw-semibold text-success" id="inspClearance">Level 4 (MoES Antarctic)</span>
+                         </div>
+                      </div>
+
+                      <p class="text-secondary small mb-2" id="inspDesc" style="font-size: 0.74rem; line-height: 1.35;">
+                        Official embarkation and departure port for all Indian Scientific Expeditions to Antarctica. Managed in direct operational coordination with NCPOR Vasco da Gama, Goa.
+                      </p>
+
+                      <div class="mb-2 p-2 rounded bg-light border border-light-subtle" style="font-size: 0.72rem;">
+                         <div class="fw-semibold text-dark mb-1"><i class="fa-solid fa-boxes-packing text-warning me-1"></i>Active Logistics Operations:</div>
+                         <div class="text-muted" id="inspOps">Voyage 44 Staging & Fuel Bunkering</div>
+                      </div>
+
+                      <!-- Weather / Ambient Telemetry -->
+                      <div class="mb-2 p-2 rounded bg-light border border-light-subtle d-flex align-items-center justify-content-between" id="inspWeatherBox" style="font-size: 0.72rem;">
+                         <div><i class="fa-solid fa-cloud-sun text-warning me-1"></i><span class="text-muted">Weather:</span> <strong id="inspWeatherText" class="text-dark">29°C, Wind 8 kn SW</strong></div>
+                         <span class="badge bg-info bg-opacity-25 text-info border" id="inspWeatherBadge">OPERATIONAL</span>
+                      </div>
+
+                      <!-- Internal Facility & Berth Details from Google Maps / Field Surveys -->
+                      <div class="mb-2 p-2 rounded bg-light border border-light-subtle" id="inspInternalDetailsBox" style="font-size: 0.72rem;">
+                         <div class="fw-semibold text-dark mb-1 d-flex align-items-center justify-content-between">
+                           <span><i class="fa-solid fa-diagram-project text-primary me-1"></i>Internal Facilities & Berths:</span>
+                           <span class="badge bg-secondary text-white" style="font-size: 0.6rem;">Google Maps Ground Truth</span>
+                         </div>
+                         <div class="text-secondary" id="inspInternalDetails">Berth 1-4 general, Berth 10-11 dedicated research vessel embarkation, cold-storage staging yard, ice-class bunkering line.</div>
+                      </div>
+
+                      <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-grow-1 py-1" id="inspFlyBtn" style="font-size: 0.72rem;">
+                          <i class="fa-solid fa-arrows-to-circle me-1"></i> Focus Target
+                        </button>
+                        <a href="https://www.google.com/maps/search/?api=1&query=15.412,73.801" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-danger flex-grow-1 py-1" id="inspGoogleMapsBtn" style="font-size: 0.72rem;" title="Open precise satellite pin in Google Maps">
+                          <i class="fa-brands fa-google me-1"></i> Google Maps
+                        </a>
+                      </div>
+                   </div>
+
+                   <!-- Emergency Alert Placeholder (Maintained for SOS integration) -->
+                   <div class="map-marker alert-marker d-none" id="mapAlertMarker" style="top: 55%; left: 50%; z-index: 1060;">
+                      <div class="marker-dot bg-danger pulse-anim"></div>
+                      <div class="marker-label text-danger fw-bold">SOS</div>
+                   </div>
+                </div>
+
+                <!-- Quick Location Selector Carousel / Pills -->
+                <div class="mt-3">
+                   <div class="d-flex align-items-center justify-content-between mb-1">
+                      <small class="text-muted fw-semibold" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <i class="fa-solid fa-location-dot text-primary me-1"></i> Quick Target Selector (Click to Fly & Inspect):
+                      </small>
+                   </div>
+                   <div class="d-flex gap-2 overflow-auto pb-1 location-pills-bar" id="locationPillsContainer" style="scrollbar-width: thin;">
+                      <!-- Injected via JavaScript from data.js -->
+                   </div>
+                </div>
+
+             </div>
+          </div>
+
+          <!-- Emergency View -->
+          <div id="view-emergency" class="view-section d-none">
+             <div class="row g-4">
+               <div class="col-lg-6">
+                 <div class="glass-panel p-4 border border-danger">
+                   <h5 class="mb-4 text-danger"><i class="fa-solid fa-siren me-2 pulse-anim"></i> <span data-i18n="reportEmergency">Report Emergency</span></h5>
+                   <form id="emergencyForm">
+                     <div class="row mb-3">
+                       <div class="col-6">
+                         <label class="form-label text-muted" data-i18n="colTeam">Team</label>
+                         <input type="text" class="form-control glass-input border-danger-subtle" id="sosTeam" required>
+                       </div>
+                       <div class="col-6">
+                         <label class="form-label text-muted" data-i18n="colStation">Location / Station</label>
+                         <input type="text" class="form-control glass-input border-danger-subtle" id="sosLocation" required>
+                       </div>
+                     </div>
+                     <div class="mb-3">
+                       <label class="form-label text-muted" data-i18n="lblIssueType">Issue Type</label>
+                       <select class="form-select glass-input border-danger-subtle" id="sosType" required>
+                         <option value="Medical">Medical Emergency</option>
+                         <option value="Equipment">Equipment Failure</option>
+                         <option value="Weather">Severe Weather/Trapped</option>
+                         <option value="Fuel">Fuel Shortage</option>
+                       </select>
+                     </div>
+                     <div class="mb-3">
+                       <label class="form-label text-muted" data-i18n="lblSeverity">Severity</label>
+                       <select class="form-select glass-input border-danger-subtle text-danger" id="sosSeverity" required>
+                         <option value="High">High - Immediate Support Needed</option>
+                         <option value="Critical">Critical - Life Threatening</option>
+                         <option value="Moderate">Moderate - Standby Support</option>
+                       </select>
+                     </div>
+                     <div class="mb-4">
+                       <label class="form-label text-muted" data-i18n="lblMessage">Message</label>
+                       <textarea class="form-control glass-input border-danger-subtle" id="sosMessage" rows="3" required></textarea>
+                     </div>
+                     <button type="submit" class="btn btn-danger w-100 fw-bold" data-i18n="btnTransmitSos">TRANSMIT SOS</button>
+                   </form>
+                 </div>
+               </div>
+               
+               <div class="col-lg-6">
+                 <div class="glass-panel p-4 h-100 d-none" id="sosResponsePanel">
+                    <h5 class="text-warning mb-4"><i class="fa-solid fa-radar me-2"></i> <span data-i18n="responseProtocol">Automated Response Protocol</span></h5>
+                    
+                    <div class="mb-4">
+                      <h6 class="text-muted text-uppercase fs-7 mb-2" data-i18n="lblNearestSupport">Nearest Support Station</h6>
+                      <div class="d-flex align-items-center p-3 rounded bg-light-subtle border border-secondary">
+                        <i class="fa-solid fa-helicopter text-cyan fs-3 me-3"></i>
+                        <div>
+                          <h4 class="mb-0 text-dark" id="sosSupportStation">Maitri Base</h4>
+                          <small class="text-cyan">Estimated Arrival: ~45 mins</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h6 class="text-muted text-uppercase fs-7 mb-2" data-i18n="lblAvailableResources">Available Immediate Resources</h6>
+                      <ul class="list-group list-group-flush glass-list">
+                        <li class="list-group-item bg-transparent text-dark border-secondary d-flex justify-content-between align-items-center">
+                          <span><i class="fa-solid fa-kit-medical text-success me-2"></i> Emergency Med-Kit A2</span>
+                          <span class="badge bg-success rounded-pill">Available</span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-dark border-secondary d-flex justify-content-between align-items-center">
+                          <span><i class="fa-solid fa-truck-snowplow text-warning me-2"></i> Snowcat Rescue Vehicle</span>
+                          <span class="badge bg-warning text-dark rounded-pill">Dispatching</span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-dark border-secondary d-flex justify-content-between align-items-center">
+                          <span><i class="fa-solid fa-walkie-talkie text-cyan me-2"></i> Satellite Comms Relay</span>
+                          <span class="badge bg-cyan text-dark rounded-pill">Active</span>
+                        </li>
+                      </ul>
+                    </div>
+                 </div>
+               </div>
+             </div>
+          </div>
+
+          <!-- Polar Logistics & Mission Analytics View -->
+          <div id="view-analytics" class="view-section d-none">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+              <div>
+                <h4 class="fw-bold mb-1 d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-chart-pie text-cyan"></i>
+                  <span data-i18n="navAnalytics">Polar Logistics & Mission Analytics</span>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle small fw-normal ms-2">Live Dynamic Engine</span>
+                </h4>
+                <div class="text-muted small">
+                  Operational delivery progress, supply buffer indicators, and cryogenic inventory risk metrics. Baseline starts at 0% and increases dynamically as data is ingested or consignments are added.
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-sm btn-outline-primary" id="btnAnalyticsQuickAddCargo">
+                  <i class="fa-solid fa-plus me-1"></i> Add Consignment (+)
+                </button>
+                <button class="btn btn-sm btn-outline-success" id="btnAnalyticsQuickDeliver">
+                  <i class="fa-solid fa-check-double me-1"></i> Mark Delivered (+)
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" id="btnAnalyticsResetZero">
+                  <i class="fa-solid fa-rotate-left me-1"></i> Reset to 0% Baseline
+                </button>
+              </div>
+            </div>
+
+            <!-- KPI Summary Cards Row -->
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3 text-center">
+                  <small class="text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Consignments Monitored</small>
+                  <h3 class="fw-bold mb-0 text-dark mt-1" id="analyticsMetricTotal">0</h3>
+                  <small class="text-muted" style="font-size: 0.72rem;" id="analyticsSubTotal">0 MT Gross Mass</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3 text-center">
+                  <small class="text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Delivered Rate</small>
+                  <h3 class="fw-bold mb-0 text-cyan mt-1" id="analyticsMetricDeliveredRate">0%</h3>
+                  <small class="text-muted" style="font-size: 0.72rem;" id="analyticsSubDelivered">0 of 0 Consignments</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3 text-center">
+                  <small class="text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Safe Stock Buffer</small>
+                  <h3 class="fw-bold mb-0 text-success mt-1" id="analyticsMetricSafeStock">0%</h3>
+                  <small class="text-muted" style="font-size: 0.72rem;" id="analyticsSubSafe">0 Safe Reserves</small>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="glass-panel p-3 text-center">
+                  <small class="text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Active Expeditions</small>
+                  <h3 class="fw-bold mb-0 text-primary mt-1" id="analyticsMetricExpeditions">0</h3>
+                  <small class="text-muted" style="font-size: 0.72rem;">Maitri & Bharati Sectors</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <!-- Card 1: Cargo Delivery Progress -->
+              <div class="col-lg-6">
+                <div class="glass-panel p-4 h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="mb-0 fw-bold" data-i18n="cargoStatusChart">Cargo Delivery Progress</h5>
+                    <span class="badge bg-light text-secondary border small" id="analyticsCargoCounter">0 records</span>
+                  </div>
+                  
+                  <!-- Delivered -->
+                  <div class="mb-4">
+                    <div class="d-flex justify-content-between text-sm mb-1">
+                      <span class="fw-semibold text-dark"><i class="fa-solid fa-circle-check text-cyan me-1"></i> Delivered</span>
+                      <span class="text-cyan fw-bold" id="analyticsDeliveredPct">0%</span>
+                    </div>
+                    <div class="progress bg-light border" style="height: 12px;">
+                      <div class="progress-bar bg-cyan" id="analyticsDeliveredBar" style="width: 0%; transition: width 0.6s ease;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted mt-1" style="font-size: 0.7rem;">
+                      <span id="analyticsDeliveredCount">0 consignments</span>
+                      <span>Target: 100% station resupply</span>
+                    </div>
+                  </div>
+
+                  <!-- In Transit -->
+                  <div class="mb-4">
+                    <div class="d-flex justify-content-between text-sm mb-1">
+                      <span class="fw-semibold text-dark"><i class="fa-solid fa-ship text-warning me-1"></i> In Transit</span>
+                      <span class="text-warning fw-bold" id="analyticsTransitPct">0%</span>
+                    </div>
+                    <div class="progress bg-light border" style="height: 12px;">
+                      <div class="progress-bar bg-warning" id="analyticsTransitBar" style="width: 0%; transition: width 0.6s ease;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted mt-1" style="font-size: 0.7rem;">
+                      <span id="analyticsTransitCount">0 consignments</span>
+                      <span>Southern Ocean maritime corridor</span>
+                    </div>
+                  </div>
+
+                  <!-- Preparing / Loaded -->
+                  <div class="mb-4">
+                    <div class="d-flex justify-content-between text-sm mb-1">
+                      <span class="fw-semibold text-dark"><i class="fa-solid fa-boxes-packing text-secondary me-1"></i> Preparing / Loaded</span>
+                      <span class="text-secondary fw-bold" id="analyticsPreparingPct">0%</span>
+                    </div>
+                    <div class="progress bg-light border" style="height: 12px;">
+                      <div class="progress-bar bg-secondary" id="analyticsPreparingBar" style="width: 0%; transition: width 0.6s ease;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted mt-1" style="font-size: 0.7rem;">
+                      <span id="analyticsPreparingCount">0 consignments</span>
+                      <span>NCPOR Goa / Mormugao staging</span>
+                    </div>
+                  </div>
+
+                  <div class="p-3 bg-light rounded border text-muted small mt-2">
+                    <i class="fa-solid fa-circle-info text-primary me-1"></i>
+                    <strong>Dynamic Computation:</strong> Percentages dynamically recalculate from the active polar cargo database. When new consignments are added or marked delivered in the Cargo module, delivery progress increases automatically.
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Card 2: Inventory Risk Assessment -->
+              <div class="col-lg-6">
+                <div class="glass-panel p-4 h-100 d-flex flex-column justify-content-between">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0 fw-bold" data-i18n="inventoryRiskChart">Inventory Risk Assessment</h5>
+                    <span class="badge bg-light text-secondary border small" id="analyticsInventoryCounter">0 items</span>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center my-3">
+                    <div class="risk-circle-chart position-relative" style="width: 170px; height: 170px;">
+                      <svg viewBox="0 0 36 36" class="circular-chart cyan" style="width: 100%; height: 100%;">
+                        <path class="circle-bg" style="stroke: #e2e8f0; stroke-width: 3.2;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" id="analyticsRiskCircle" stroke-dasharray="0, 100" style="stroke: #06b6d4; stroke-width: 3.2; transition: stroke-dasharray 0.8s ease;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      </svg>
+                      <div class="chart-content position-absolute top-50 start-50 translate-middle text-center">
+                        <h2 class="mb-0 text-cyan fw-bold" id="analyticsSafeStockPct">0%</h2>
+                        <small class="text-muted fw-semibold" data-i18n="safeStockLabel">Safe Stock</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Risk Distribution Breakdown -->
+                  <div class="row g-2 text-center mb-2">
+                    <div class="col-4">
+                      <div class="p-2 border rounded bg-white">
+                        <small class="text-success fw-bold d-block" style="font-size: 0.72rem;">LOW RISK (SAFE)</small>
+                        <span class="fs-6 fw-bold text-dark" id="analyticsCountLowRisk">0</span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="p-2 border rounded bg-white">
+                        <small class="text-warning fw-bold d-block" style="font-size: 0.72rem;">MODERATE</small>
+                        <span class="fs-6 fw-bold text-dark" id="analyticsCountModerateRisk">0</span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="p-2 border rounded bg-white">
+                        <small class="text-danger fw-bold d-block" style="font-size: 0.72rem;">HIGH RISK</small>
+                        <span class="fs-6 fw-bold text-dark" id="analyticsCountHighRisk">0</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p-3 bg-light rounded border text-muted small">
+                    <i class="fa-solid fa-shield-halved text-success me-1"></i>
+                    <strong>Safe Buffer Index:</strong> Safe Stock measures inventory items where current stock exceeds safety thresholds. When rations, cryogenic fuel, and emergency medical kits are added or restocked, the safe buffer rating increases.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Views Container -->
+
+        <!-- Mahoraga Floating Command Wheel (Only within Authorized App Session) -->
+        <div class="command-wheel-wrapper" id="commandWheel" title="Mahoraga Polar Command Wheel">
+          <div class="wheel-ring" aria-hidden="true"></div>
+          <button type="button" class="wheel-center-btn" id="commandWheelBtn" aria-label="Toggle Mahoraga Quick Navigation Wheel" title="Mahoraga Quick Command Wheel">
+            <!-- 8-Handled Divine General Mahoraga Dharmachakra Wheel -->
+            <svg class="wheel-icon" viewBox="0 0 100 100" width="38" height="38" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Outer Rim -->
+              <circle cx="50" cy="50" r="32" stroke-width="4.5" />
+              <!-- Inner Hub Rings -->
+              <circle cx="50" cy="50" r="14" stroke-width="3" />
+              <circle cx="50" cy="50" r="5" fill="currentColor" />
+              <!-- 8 Radial Spokes with Authentic Mahoraga Handles -->
+              <line x1="50" y1="36" x2="50" y2="18" stroke-width="3.5" />
+              <circle cx="50" cy="11" r="5.5" fill="currentColor" />
+              <line x1="60" y1="40" x2="73" y2="27" stroke-width="3.5" />
+              <circle cx="78" cy="22" r="5.5" fill="currentColor" />
+              <line x1="64" y1="50" x2="82" y2="50" stroke-width="3.5" />
+              <circle cx="89" cy="50" r="5.5" fill="currentColor" />
+              <line x1="60" y1="60" x2="73" y2="73" stroke-width="3.5" />
+              <circle cx="78" cy="78" r="5.5" fill="currentColor" />
+              <line x1="50" y1="64" x2="50" y2="82" stroke-width="3.5" />
+              <circle cx="50" cy="89" r="5.5" fill="currentColor" />
+              <line x1="40" y1="60" x2="27" y2="73" stroke-width="3.5" />
+              <circle cx="22" cy="78" r="5.5" fill="currentColor" />
+              <line x1="36" y1="50" x2="18" y2="50" stroke-width="3.5" />
+              <circle cx="11" cy="50" r="5.5" fill="currentColor" />
+              <line x1="40" y1="40" x2="27" y2="27" stroke-width="3.5" />
+              <circle cx="22" cy="22" r="5.5" fill="currentColor" />
+            </svg>
+          </button>
+          <div class="wheel-options">
+            <button type="button" class="wheel-opt" style="--i:0" onclick="window.quickNavigate ? window.quickNavigate('dashboard') : (window.IceTrack && window.IceTrack.quickNavigate('dashboard'))" title="Command Dashboard" aria-label="Command Dashboard">
+              <i class="fa-solid fa-gauge-high"></i>
+            </button>
+            <button type="button" class="wheel-opt" style="--i:1" onclick="window.quickNavigate ? window.quickNavigate('expeditions') : (window.IceTrack && window.IceTrack.quickNavigate('expeditions'))" title="Polar Expeditions" aria-label="Polar Expeditions">
+              <i class="fa-solid fa-compass"></i>
+            </button>
+            <button type="button" class="wheel-opt" style="--i:2" onclick="window.quickNavigate ? window.quickNavigate('map') : (window.IceTrack && window.IceTrack.quickNavigate('map'))" title="Geospatial Map" aria-label="Geospatial Map">
+              <i class="fa-solid fa-earth-americas"></i>
+            </button>
+            <button type="button" class="wheel-opt" style="--i:3" onclick="window.quickNavigate ? window.quickNavigate('cargo') : (window.IceTrack && window.IceTrack.quickNavigate('cargo'))" title="Cargo Logistics" aria-label="Cargo Logistics">
+              <i class="fa-solid fa-truck-ramp-box"></i>
+            </button>
+            <button type="button" class="wheel-opt" style="--i:4" onclick="window.quickNavigate ? window.quickNavigate('analytics') : (window.IceTrack && window.IceTrack.quickNavigate('analytics'))" title="Analytics & Telemetry" aria-label="Analytics & Telemetry">
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: Register New Cargo Consignment -->
+    <div class="modal fade" id="modalAddCargo" tabindex="-1" aria-labelledby="modalAddCargoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-2 border-dark shadow">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title fw-bold" id="modalAddCargoLabel">
+              <i class="fa-solid fa-ship text-primary me-2"></i>Register Cargo Consignment
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="formAddCargo">
+            <div class="modal-body p-4">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Cargo ID / Tracking</label>
+                  <input type="text" class="form-control" id="newCargoId" placeholder="e.g. CGO-2101">
+                  <small class="text-muted" style="font-size: 11px;">Leave blank to auto-generate</small>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Priority Level</label>
+                  <select class="form-select" id="newCargoPriority">
+                    <option value="Normal">Normal</option>
+                    <option value="High" selected>High Priority</option>
+                    <option value="Critical">Critical (Immediate Relay)</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-semibold text-muted">Item Description *</label>
+                  <input type="text" class="form-control" id="newCargoItem" placeholder="e.g. Glaciological Steam Drill Assembly" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Payload Weight (kg) *</label>
+                  <input type="number" class="form-control" id="newCargoWeight" placeholder="e.g. 750" min="1" step="0.1" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Initial Dispatch Status</label>
+                  <select class="form-select" id="newCargoStatus">
+                    <option value="Preparing" selected>Preparing at Port</option>
+                    <option value="Loaded">Loaded on Vessel</option>
+                    <option value="In Transit">In Transit (Sea/Air)</option>
+                    <option value="Delivered">Delivered at Station</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Origin Embarkation Port *</label>
+                  <select class="form-select" id="newCargoOrigin" required>
+                    <option value="Mormugao Port (Goa)" selected>Mormugao Port (Goa)</option>
+                    <option value="Kochi Port (Cochin)">Kochi Port (Cochin)</option>
+                    <option value="Mumbai Port (JNPT)">Mumbai Port (JNPT)</option>
+                    <option value="Chennai Port">Chennai Port</option>
+                    <option value="Cape Town (Gateway)">Cape Town (Gateway)</option>
+                    <option value="NCPOR Goa Hub">NCPOR Goa Hub</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Destination Polar Base *</label>
+                  <select class="form-select" id="newCargoDestination" required>
+                    <option value="Maitri" selected>Maitri Station</option>
+                    <option value="Bharati">Bharati Station</option>
+                    <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer bg-light">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="btnSubmitAddCargo">
+                <i class="fa-solid fa-check me-1"></i> Confirm & Dispatch
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Add Inventory Reserve Item -->
+    <div class="modal fade" id="modalAddInventory" tabindex="-1" aria-labelledby="modalAddInventoryLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-2 border-dark shadow">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title fw-bold" id="modalAddInventoryLabel">
+              <i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Add Station Stock Reserve
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="formAddInventory">
+            <div class="modal-body p-4">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label small fw-semibold text-muted">Stock Item Name *</label>
+                  <input type="text" class="form-control" id="newInvItem" placeholder="e.g. Sub-Zero Hydraulic Oil (Barrels)" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Category</label>
+                  <select class="form-select" id="newInvCategory">
+                    <option value="Fuel & Power">Fuel & Power</option>
+                    <option value="Life Support">Life Support & Cryo</option>
+                    <option value="Rations">Rations & Food Supplies</option>
+                    <option value="Medical">Medical & First Aid</option>
+                    <option value="Scientific Instruments">Scientific Instruments</option>
+                    <option value="Survival Gear">Extreme Cold Survival Gear</option>
+                    <option value="Communications">SATCOM & Telemetry</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Station Location *</label>
+                  <select class="form-select" id="newInvLocation" required>
+                    <option value="Maitri" selected>Maitri Station</option>
+                    <option value="Bharati">Bharati Station</option>
+                    <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Current Quantity *</label>
+                  <input type="number" class="form-control" id="newInvCurrent" placeholder="e.g. 150" min="0" step="1" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Min Safety Threshold *</label>
+                  <input type="number" class="form-control" id="newInvThreshold" placeholder="e.g. 50" min="1" step="1" required>
+                  <small class="text-muted" style="font-size: 11px;">Triggers alert when quantity is below this</small>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Responsible Officer</label>
+                  <input type="text" class="form-control" id="newInvResponsible" placeholder="e.g. Chief Engineer / Logistics Lead">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Display Icon</label>
+                  <select class="form-select" id="newInvIcon">
+                    <option value="fa-boxes-stacked" selected>Boxes / General</option>
+                    <option value="fa-gas-pump">Gas / Fuel</option>
+                    <option value="fa-wind">Oxygen / Air</option>
+                    <option value="fa-suitcase-medical">Medical Kit</option>
+                    <option value="fa-bowl-food">Food Rations</option>
+                    <option value="fa-oil-well">Oil / Grease</option>
+                    <option value="fa-vest">Thermal Wear</option>
+                    <option value="fa-satellite-dish">SATCOM Dish</option>
+                    <option value="fa-temperature-low">Thermal Probe</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer bg-light">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="btnSubmitAddInventory">
+                <i class="fa-solid fa-check me-1"></i> Save to Station Inventory
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Register Personnel Member -->
+    <div class="modal fade" id="modalAddPersonnel" tabindex="-1" aria-labelledby="modalAddPersonnelLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-2 border-dark shadow">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title fw-bold" id="modalAddPersonnelLabel">
+              <i class="fa-solid fa-user-plus text-primary me-2"></i>Add Personnel Member
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="formAddPersonnel">
+            <div class="modal-body p-4">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Officer / Person Name *</label>
+                  <input type="text" class="form-control" id="newPersonName" placeholder="e.g. Person K" required>
+                  <small class="text-muted" style="font-size: 11px;">Follows Person Alphabet naming pattern</small>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Role / Function *</label>
+                  <input type="text" class="form-control" id="newPersonRole" placeholder="e.g. Cryo-Technician" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Assigned Team / Unit</label>
+                  <select class="form-select" id="newPersonTeam">
+                    <option value="Command Wing" selected>Command Wing</option>
+                    <option value="Alpha">Team Alpha (Science)</option>
+                    <option value="Bravo">Team Bravo (Logistics)</option>
+                    <option value="Echo">Team Echo (Maintenance)</option>
+                    <option value="Naval Wing">Naval Wing</option>
+                    <option value="Air Support">Air Support</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Station Location *</label>
+                  <select class="form-select" id="newPersonStation" required>
+                    <option value="Maitri" selected>Maitri Station</option>
+                    <option value="Bharati">Bharati Station</option>
+                    <option value="Dakshin Ice Camp">Dakshin Ice Camp</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Operational Status</label>
+                  <select class="form-select" id="newPersonStatus">
+                    <option value="Active" selected>Active</option>
+                    <option value="On-route">On-route</option>
+                    <option value="Medical Hold">Medical Hold</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-muted">Security Clearance</label>
+                  <select class="form-select" id="newPersonClearance">
+                    <option value="Level 3" selected>Level 3</option>
+                    <option value="Level 4">Level 4</option>
+                    <option value="Level 5">Level 5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer bg-light">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="btnSubmitAddPersonnel">
+                <i class="fa-solid fa-check me-1"></i> Register Personnel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script>
+      window.toggleLoginPassword = function(event) {
+        if (event && event.preventDefault) event.preventDefault();
+        var passInput = document.getElementById('loginPassword');
+        var icon = document.getElementById('togglePasswordIcon');
+        if (!passInput) return;
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          if (icon) icon.className = 'fa-solid fa-eye-slash';
+        } else {
+          passInput.type = 'password';
+          if (icon) icon.className = 'fa-solid fa-eye';
+        }
+      };
+    </script>
+    <!-- Main Application Bundle - Loaded First for Instant Local/Zip Offline Execution -->
+    <script src="./js/bundle.js"></script>
+    <!-- Visualization & External Libraries (Non-blocking with robust fallbacks) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </body>
+</html>
+
